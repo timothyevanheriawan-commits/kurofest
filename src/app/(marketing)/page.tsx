@@ -19,11 +19,6 @@ export default function MarketingPage() {
         <>
             <HeroSection />
 
-            {/* Marquee Divider - Festival Energy */}
-            <MarqueeDivider
-                items={["TOKYO BIG SIGHT", "AUG 15-16", "2026", "黒祭", "KUROFEST"]}
-                variant="dark"
-            />
 
             {/* Countdown Section */}
             <section className="bg-sumi-950 py-16 md:py-24">
@@ -96,7 +91,8 @@ export default function MarketingPage() {
                     <GuestGrid />
 
                     <div className="mt-12 flex justify-end">
-                        <MagneticCTA href="/guests" variant="outline" size="lg">
+                        <MagneticCTA href="/guests" variant="outline" size="lg" suppressHydrationWarning
+>
                             View All Guests
                             <ArrowRight size={16} className="ml-2" />
                         </MagneticCTA>
@@ -311,7 +307,11 @@ export default function MarketingPage() {
                                 )}
                                 required
                             />
-                            <MagneticCTA variant="secondary" size="lg">
+                            <MagneticCTA
+                                variant="secondary"
+                                size="lg"
+                                suppressHydrationWarning
+                            >
                                 Subscribe
                             </MagneticCTA>
                         </form>

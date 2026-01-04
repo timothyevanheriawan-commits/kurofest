@@ -10,9 +10,18 @@ const FOOTER_LINKS = {
         { label: "Tickets", href: "/tickets" },
     ],
     social: [
-        { label: "Twitter", href: "#" },
-        { label: "Instagram", href: "#" },
-        { label: "YouTube", href: "#" },
+        {
+            label: "Twitter",
+            href: "https://x.com/kurofest"
+        },
+        {
+            label: "Instagram",
+            href: "https://www.instagram.com/kurofest"
+        },
+        {
+            label: "YouTube",
+            href: "https://www.youtube.com/@kurofest"
+        },
     ],
 };
 
@@ -134,35 +143,24 @@ export function Footer({ variant = "default" }: FooterProps) {
                                     info@kurofest.jp
                                 </a>
                             </li>
+                        
                             <li className="pt-2 border-t border-washi-100/10">
+                        
                                 <span className="text-washi-100/70">Tokyo Big Sight</span>
                             </li>
                             <li>3-11-1 Ariake, Koto-ku</li>
                             <li>Tokyo 135-0063, Japan</li>
-                            <li className="pt-2">
-                                <span className="font-mono text-washi-100/70">
-                                    Aug 15-16, 2026
-                                </span>
-                            </li>
                         </ul>
                     </div>
                 </div>
 
                 {/* Bottom bar */}
-                <div className="mt-16 pt-8 border-t border-washi-100/10 flex flex-col md:flex-row items-center justify-between gap-4">
-                    <p className="text-xs text-washi-100/30">
-                        © 2026 KuroFest. All rights reserved.
-                    </p>
-                    <div className="flex gap-6 text-xs text-washi-100/30">
-                        <a href="#" className="hover:text-washi-100/60 transition-colors">
-                            Privacy Policy
-                        </a>
-                        <a href="#" className="hover:text-washi-100/60 transition-colors">
-                            Terms of Service
-                        </a>
-                        <a href="#" className="hover:text-washi-100/60 transition-colors">
-                            Accessibility
-                        </a>
+                <div className="mt-20 pt-8 border-t border-sumi-900 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-sumi-500">
+                    <p>© 2026 KuroFest. All rights reserved.</p>
+                    <div className="flex gap-6">
+                        <Link href="/privacy" className="hover:text-washi-100 transition-colors">Privacy Policy</Link>
+                        <Link href="/terms" className="hover:text-washi-100 transition-colors">Terms of Service</Link>
+                        <Link href="/accessbility" className="hover:text-washi-100 transition-colors">Accessibility</Link>
                     </div>
                 </div>
             </div>

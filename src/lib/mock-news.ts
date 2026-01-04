@@ -43,7 +43,7 @@ Early bird pricing is available until July 31st, 2026. Don't miss your chance to
     category: "tickets",
     date: "2026-06-15",
     image:
-      "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?q=80&w=1200",
+      "https://images.unsplash.com/photo-1707365782267-eb5583f8c361?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     featured: true,
   },
   {
@@ -122,8 +122,7 @@ Full schedule with all events will be released one month before the convention.`
     slug: "venue-map-preview",
     title: "Tokyo Big Sight Venue Layout Revealed",
     title_ja: "東京ビッグサイト会場レイアウト公開",
-    excerpt:
-      "Explore the floor plan for this year's expanded venue space.",
+    excerpt: "Explore the floor plan for this year's expanded venue space.",
     content: `KuroFest 2026 will occupy East Halls 1-8 at Tokyo Big Sight, our largest venue yet!
 
 **Key Areas:**
@@ -145,8 +144,17 @@ export function getNewsItem(slug: string): NewsItem | undefined {
 }
 
 export function getFeaturedNews(): NewsItem[] {
-  return MOCK_NEWS.filter((item) => item.featured);
+  return MOCK_NEWS.filter((item) => item.featured).map((item) => ({
+    ...item,
+    formattedDate: new Intl.DateTimeFormat("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+      timeZone: "UTC",
+    }).format(new Date(item.date)),
+  }));
 }
+
 
 export function getNewsByCategory(category: NewsItem["category"]): NewsItem[] {
   return MOCK_NEWS.filter((item) => item.category === category);

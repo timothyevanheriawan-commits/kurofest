@@ -246,7 +246,7 @@ export default async function NewsDetailPage({
                 </article>
             </main>
 
-            <Footer variant="minimal" />
+            <Footer />
         </>
     );
 }
