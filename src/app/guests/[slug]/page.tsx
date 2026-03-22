@@ -1,12 +1,7 @@
 import type { Metadata } from "next";
 import { GuestDetails } from "@/components/features/guests/guest-details";
-import { getGuestBySlug, MOCK_GUESTS } from "@/lib/mock-data";
+import { getGuestBySlug } from "@/lib/data";
 import { notFound } from "next/navigation";
-
-// Generate static paths for performance
-export function generateStaticParams() {
-    return MOCK_GUESTS.map((guest) => ({ slug: guest.slug }));
-}
 
 // Dynamic metadata
 export async function generateMetadata({
@@ -15,7 +10,7 @@ export async function generateMetadata({
     params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
     const { slug } = await params;
-    const guest = getGuestBySlug(slug);
+    const guest = await getGuestBySlug(slug);
 
     if (!guest) {
         return { title: "Guest Not Found" };
@@ -34,7 +29,7 @@ export default async function GuestPage({
     params: Promise<{ slug: string }>;
 }) {
     const { slug } = await params;
-    const guest = getGuestBySlug(slug);
+    const guest = await getGuestBySlug(slug);
 
     if (!guest) {
         return notFound();

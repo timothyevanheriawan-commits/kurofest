@@ -3,53 +3,41 @@
 import { useRef, ElementType } from "react";
 import { motion, useInView, Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   VARIANTS
-   ═══════════════════════════════════════════════════════════════════════════ */
+import { EASING, DURATION } from "@/lib/motion-config";
 
 const containerVariants: Variants = {
     hidden: {},
-    visible: {
+    visible: (delayChildren: number = 0) => ({
         transition: {
             staggerChildren: 0.1,
-            delayChildren: 0.1,
+            delayChildren,
         },
-    },
+    }),
 };
 
 const lineVariants: Variants = {
-    hidden: {
-        y: "100%",
-    },
+    hidden: { y: "100%" },
     visible: {
         y: 0,
         transition: {
-            duration: 0.8,
-            ease: [0.33, 1, 0.68, 1], // Custom ease - editorial feel
+            duration: DURATION.slow,
+            ease: EASING.quintOut,
         },
     },
 };
 
 const characterVariants: Variants = {
-    hidden: {
-        y: "100%",
-        opacity: 0,
-    },
+    hidden: { y: "100%", opacity: 0 },
     visible: (i: number) => ({
         y: 0,
         opacity: 1,
         transition: {
-            duration: 0.5,
-            ease: [0.33, 1, 0.68, 1],
+            duration: DURATION.normal,
+            ease: EASING.quintOut,
             delay: i * 0.03,
         },
     }),
 };
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   COMPONENTS
-   ═══════════════════════════════════════════════════════════════════════════ */
 
 interface TextRevealProps {
     children: string;
@@ -59,9 +47,6 @@ interface TextRevealProps {
     once?: boolean;
 }
 
-/**
- * Line-by-line text reveal with masked animation
- */
 export function TextReveal({
     children,
     className,
@@ -71,28 +56,20 @@ export function TextReveal({
 }: TextRevealProps) {
     const ref = useRef<HTMLElement>(null);
     const isInView = useInView(ref, { once, margin: "-100px" });
-
-    // Split text into lines (by newline or just treat as single line)
     const lines = children.split("\n");
 
     return (
-        <Component
-            ref={ref}
-            className={cn("overflow-hidden", className)}
-        >
+        <Component ref={ref} className={cn("overflow-hidden", className)}>
             <motion.span
+                custom={delay}
                 variants={containerVariants}
                 initial="hidden"
                 animate={isInView ? "visible" : "hidden"}
                 className="block"
-                style={{ transitionDelay: `${delay}s` }}
             >
                 {lines.map((line, lineIndex) => (
                     <span key={lineIndex} className="block overflow-hidden">
-                        <motion.span
-                            variants={lineVariants}
-                            className="block"
-                        >
+                        <motion.span variants={lineVariants} className="block">
                             {line}
                         </motion.span>
                     </span>
@@ -102,9 +79,6 @@ export function TextReveal({
     );
 }
 
-/**
- * Character-by-character reveal for dramatic headers
- */
 export function TextRevealByChar({
     children,
     className,
@@ -114,20 +88,16 @@ export function TextRevealByChar({
 }: TextRevealProps) {
     const ref = useRef<HTMLElement>(null);
     const isInView = useInView(ref, { once, margin: "-100px" });
-
     const characters = children.split("");
 
     return (
-        <Component
-            ref={ref}
-            className={cn("overflow-hidden", className)}
-            aria-label={children}
-        >
+        <Component ref={ref} className={cn("overflow-hidden", className)} aria-label={children}>
             <motion.span
+                custom={delay}
+                variants={containerVariants}
                 initial="hidden"
                 animate={isInView ? "visible" : "hidden"}
                 className="inline-flex flex-wrap"
-                style={{ transitionDelay: `${delay}s` }}
             >
                 {characters.map((char, i) => (
                     <span key={i} className="overflow-hidden inline-block">
@@ -146,9 +116,6 @@ export function TextRevealByChar({
     );
 }
 
-/**
- * Word-by-word reveal - good for subtitles
- */
 interface WordRevealProps extends Omit<TextRevealProps, "children"> {
     children: string;
 }
@@ -162,27 +129,20 @@ export function TextRevealByWord({
 }: WordRevealProps) {
     const ref = useRef<HTMLElement>(null);
     const isInView = useInView(ref, { once, margin: "-50px" });
-
     const words = children.split(" ");
 
     return (
-        <Component
-            ref={ref}
-            className={cn("overflow-hidden", className)}
-        >
+        <Component ref={ref} className={cn("overflow-hidden", className)}>
             <motion.span
+                custom={delay}
                 variants={containerVariants}
                 initial="hidden"
                 animate={isInView ? "visible" : "hidden"}
                 className="inline-flex flex-wrap gap-x-[0.25em]"
-                style={{ transitionDelay: `${delay}s` }}
             >
                 {words.map((word, i) => (
                     <span key={i} className="overflow-hidden inline-block">
-                        <motion.span
-                            variants={lineVariants}
-                            className="inline-block"
-                        >
+                        <motion.span variants={lineVariants} className="inline-block">
                             {word}
                         </motion.span>
                     </span>
@@ -192,9 +152,6 @@ export function TextRevealByWord({
     );
 }
 
-/**
- * Slide up reveal for any element (not just text)
- */
 interface SlideRevealProps {
     children: React.ReactNode;
     className?: string;
@@ -202,6 +159,14 @@ interface SlideRevealProps {
     direction?: "up" | "down" | "left" | "right";
     once?: boolean;
 }
+
+const OFFSET = 40;
+const directionOffset = {
+    up: { y: OFFSET, x: 0 },
+    down: { y: -OFFSET, x: 0 },
+    left: { y: 0, x: OFFSET },
+    right: { y: 0, x: -OFFSET },
+};
 
 export function SlideReveal({
     children,
@@ -212,26 +177,28 @@ export function SlideReveal({
 }: SlideRevealProps) {
     const ref = useRef<HTMLDivElement>(null);
     const isInView = useInView(ref, { once, margin: "-50px" });
+    const { x, y } = directionOffset[direction];
 
-    const directionMap = {
-        up: { y: 40, x: 0 },
-        down: { y: -40, x: 0 },
-        left: { y: 0, x: 40 },
-        right: { y: 0, x: -40 },
+    const variants: Variants = {
+        hidden: { opacity: 0, x, y },
+        visible: {
+            opacity: 1,
+            x: 0,
+            y: 0,
+            transition: {
+                duration: DURATION.slow,
+                ease: EASING.quintOut,
+                delay,
+            },
+        },
     };
 
-    const { x, y } = directionMap[direction];
-
     return (
-        <div ref={ref} className={cn("overflow-hidden", className)}>
+        <div ref={ref} className={cn(className)}>
             <motion.div
-                initial={{ opacity: 0, x, y }}
-                animate={isInView ? { opacity: 1, x: 0, y: 0 } : { opacity: 0, x, y }}
-                transition={{
-                    duration: 0.7,
-                    ease: [0.33, 1, 0.68, 1],
-                    delay,
-                }}
+                variants={variants}
+                initial="hidden"
+                animate={isInView ? "visible" : "hidden"}
             >
                 {children}
             </motion.div>

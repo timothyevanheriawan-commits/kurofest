@@ -7,7 +7,10 @@ export const metadata: Metadata = {
     description: "Latest announcements and updates from KuroFest 2026",
 };
 
-export default function NewsPage() {
+import { getNews } from "@/lib/data";
+
+export default async function NewsPage() {
+    const news = await getNews();
     return (
         <>
             <main className="min-h-screen bg-washi-100 px-4 pt-28 pb-24 md:px-8">
@@ -43,7 +46,7 @@ export default function NewsPage() {
                         </p>
                     </header>
 
-                    <NewsGrid />
+                    <NewsGrid/>
                 </div>
             </main>
 

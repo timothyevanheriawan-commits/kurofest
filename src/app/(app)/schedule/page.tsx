@@ -10,33 +10,28 @@ export const metadata: Metadata = {
 export default function SchedulePage() {
     return (
         <>
-            <main className="min-h-screen bg-washi-100 px-4 pt-28 pb-24 md:px-8">
+            <main className="min-h-screen bg-washi-100 px-4 pt-24 pb-24 md:px-8">
                 <div className="mx-auto max-w-4xl">
-                    <header className="mb-12 text-center">
-                        <div className="mx-auto mb-6 w-px h-12 bg-sumi-300" />
+                    {/* Compact header — content is what matters here */}
+                    <header className="mb-10 flex items-end justify-between gap-6 border-b-2 border-sumi-950 pb-6">
+                        <div>
+                            <span className="text-[10px] font-semibold tracking-[0.4em] text-sumi-400 uppercase">
+                                Event Programme
+                            </span>
+                            <h1 className="mt-1 font-display text-4xl md:text-5xl font-black tracking-tight text-sumi-950">
+                                Timetable
+                            </h1>
+                            <p className="mt-1 font-serif text-lg text-sumi-400">予定表</p>
+                        </div>
 
-                        <span className="text-[10px] font-semibold tracking-[0.4em] text-sumi-400 uppercase">
-                            Event Programme
-                        </span>
-
-                        <h1 className="mt-3 font-display text-5xl md:text-7xl font-black tracking-tight text-sumi-950">
-                            Timetable
-                        </h1>
-
-                        <p className="mt-2 font-serif text-2xl text-sumi-400">予定表</p>
-
-                        <div className="mt-6 mx-auto w-16 h-0.5 bg-shu-600" />
-
-                        <div className="mt-8 flex items-center justify-center gap-6 text-sm text-sumi-500">
-                            <div className="flex items-center gap-2">
-                                <div className="w-1.5 h-1.5 bg-sumi-400" />
-                                <span>Tokyo Big Sight</span>
-                            </div>
-                            <div className="w-px h-4 bg-sumi-300" />
-                            <div className="flex items-center gap-2">
-                                <div className="w-1.5 h-1.5 bg-shu-600" />
-                                <span className="font-mono">Aug 15-16, 2026</span>
-                            </div>
+                        {/* Date + venue — right-aligned, compact */}
+                        <div className="shrink-0 text-right hidden sm:block">
+                            <span className="block font-mono text-xs text-sumi-500 tracking-wider">
+                                Aug 15–16, 2026
+                            </span>
+                            <span className="block text-xs text-sumi-400 mt-1">
+                                Tokyo Big Sight
+                            </span>
                         </div>
                     </header>
 

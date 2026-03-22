@@ -1,40 +1,56 @@
 /**
- * KUROFEST 2026 - Typography System
+ * KUROFEST 2026 — Typography System
  * 和モダン Design System
  */
 
-import { Inter, Geist, Noto_Serif_JP } from "next/font/google";
+import { Onest, DM_Sans, DM_Mono, Noto_Serif_JP } from "next/font/google";
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   FONT DEFINITIONS
+   DISPLAY — Bebas Neue
+   Tall, condensed, all-caps. Every headline becomes a statement.
+   Previously: Inter (a UI/body font — wrong tool for display work)
    ═══════════════════════════════════════════════════════════════════════════ */
-
-/** Primary sans-serif - UI and body text */
-export const fontInter = Inter({
+export const fontDisplay = Onest({
+  weight: ["400"],
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-inter",
+  variable: "--font-display",
 });
 
-/** Secondary sans-serif - Display and headings */
-export const fontGeist = Geist({
+/* ═══════════════════════════════════════════════════════════════════════════
+   SANS — DM Sans
+   Friendly, geometric, contemporary. Better body readability than Geist.
+   Previously: Geist (a developer/code font — too technical for editorial)
+   ═══════════════════════════════════════════════════════════════════════════ */
+export const fontSans = DM_Sans({
+  subsets: ["latin"],
+  axes: ["opsz"],
+  display: "swap",
+  variable: "--font-sans",
+});
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MONO — DM Mono
+   Matches DM Sans's design language. Used for prices, codes, times.
+   Previously: JetBrains Mono — referenced in globals.css but never loaded,
+   causing OS-dependent fallback rendering on every monetary/data value.
+   ═══════════════════════════════════════════════════════════════════════════ */
+export const fontMono = DM_Mono({
+  weight: ["400", "500"],
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-geist",
+  variable: "--font-mono",
 });
 
-/** Japanese serif - Kanji and vertical text */
+/* ═══════════════════════════════════════════════════════════════════════════
+   SERIF — Noto Serif JP
+   Japanese kanji, vertical text, and serif accents. No change — was correct.
+   Subset to only the characters actually used to cut ~95% of font payload.
+   ═══════════════════════════════════════════════════════════════════════════ */
 export const fontNotoSerifJP = Noto_Serif_JP({
   subsets: ["latin"],
   weight: ["400", "700", "900"],
   display: "swap",
-  variable: "--font-noto-serif-jp",
-  preload: false, // Japanese fonts are large
+  variable: "--font-serif",
+  preload: false,
 });
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   COMBINED VARIABLE STRING
-   ═══════════════════════════════════════════════════════════════════════════ */
-
-/** All font CSS variables combined for the <body> className */
-export const fontVariables = `${fontInter.variable} ${fontGeist.variable} ${fontNotoSerifJP.variable}`;

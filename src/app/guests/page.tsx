@@ -12,31 +12,21 @@ export default function GuestsPage() {
         <>
             <main className="min-h-screen bg-washi-100 px-4 pt-28 pb-24 md:px-8">
                 <div className="mx-auto max-w-7xl">
-                    {/* Page Header */}
-                    <header className="mb-12 md:mb-16">
-                        <div className="mb-6 w-px h-12 bg-sumi-300 mx-auto md:mx-0" />
+                    <header className="mb-12 md:mb-16 flex gap-6 items-start">
+                        {/* Vertical accent rule */}
+                        <div className="hidden md:block w-px self-stretch bg-sumi-200 shrink-0 mt-1" />
 
-                        <span className="block text-center md:text-left text-[10px] font-semibold tracking-[0.4em] text-sumi-400 uppercase">
-                            Featured Artists & Performers
-                        </span>
-
-                        <h1 className="mt-3 text-center md:text-left font-display text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-sumi-950">
-                            Special Guests
-                        </h1>
-
-                        <p className="mt-2 text-center md:text-left font-serif text-xl md:text-2xl text-sumi-400">
-                            特別ゲスト
-                        </p>
-
-                        <div className="mt-6 w-24 h-0.5 bg-shu-600 mx-auto md:mx-0" />
-
-                        <p className="mt-6 text-center md:text-left text-sm text-sumi-600 max-w-xl">
-                            Meet the incredible artists, performers, and creators joining us at KuroFest 2026.
-                            From award-winning cosplayers to legendary voice actors.
-                        </p>
+                        <div>
+                            <span className="text-[10px] font-semibold tracking-[0.4em] text-sumi-400 uppercase">
+                                特別ゲスト
+                            </span>
+                            <h1 className="mt-2 font-display text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-sumi-950">
+                                Special Guests
+                            </h1>
+                            <div className="mt-4 w-16 h-0.5 bg-shu-600" />
+                        </div>
                     </header>
 
-                    {/* Guest Grid */}
                     <GuestGrid />
                 </div>
             </main>

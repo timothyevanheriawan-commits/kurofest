@@ -1,128 +1,104 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-geist);
-  --font-display: var(--font-inter);
-  --font-serif: "Noto Serif JP", "Hiragino Mincho Pro", serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  /* ─────────────────────────────────────────────────────────────────────────
+     FONTS
+     display  → Bebas Neue   (condensed, all-caps headlines)
+     sans     → DM Sans      (body text, UI labels)
+     mono     → DM Mono      (prices, codes, timestamps)
+     serif    → Noto Serif JP (kanji, vertical text, editorial accents)
+     ───────────────────────────────────────────────────────────────────────── */
+  --font-display: var(--font-display);
+  --font-sans:    var(--font-sans);
+  --font-mono:    var(--font-mono);
+  --font-serif:   "Noto Serif JP", "Hiragino Mincho Pro", serif;
 
   /* ─────────────────────────────────────────────────────────────────────────
-       SUMI INK-墨 (Black Spectrum)
-       The depth of freshly ground ink on suzuri stone
-       ─────────────────────────────────────────────────────────────────────── */
-  --color-sumi-950: oklch(0.05 0.005 250); /* True sumi-typography */
-  --color-sumi-900: oklch(0.1 0.005 250); /* Deep ink */
-  --color-sumi-800: oklch(0.18 0.008 250); /* Rich black */
-  --color-sumi-700: oklch(0.25 0.01 250); /* Soft black */
-  --color-sumi-600: oklch(0.35 0.01 250); /* Charcoal */
-  --color-sumi-500: oklch(0.45 0.01 250); /* Stone gray */
-  --color-sumi-400: oklch(0.55 0.008 250); /* Warm gray */
-  --color-sumi-300: oklch(0.7 0.005 250); /* Light gray */
+     SUMI INK — 墨 (Black Spectrum)
+     The depth of freshly ground ink on suzuri stone
+     ───────────────────────────────────────────────────────────────────────── */
+  --color-sumi-950: oklch(0.05 0.005 250); /* True sumi — primary text  */
+  --color-sumi-900: oklch(0.10 0.005 250); /* Deep ink                  */
+  --color-sumi-800: oklch(0.18 0.008 250); /* Rich black                */
+  --color-sumi-700: oklch(0.25 0.010 250); /* Soft black                */
+  --color-sumi-600: oklch(0.35 0.010 250); /* Charcoal                  */
+  --color-sumi-500: oklch(0.45 0.010 250); /* Stone gray                */
+  --color-sumi-400: oklch(0.55 0.008 250); /* Warm gray                 */
+  --color-sumi-300: oklch(0.70 0.005 250); /* Light gray                */
+  --color-sumi-200: oklch(0.82 0.004 250); /* Near-white gray           */
+  /* Fix: sumi-100 was used in 23 component files but never defined,
+     causing silent fallback to Tailwind's default gray scale          */
+  --color-sumi-100: oklch(0.91 0.003 250); /* Faintest tint             */
+  --color-sumi-50:  oklch(0.96 0.002 250); /* Barely-there wash         */
 
   /* ─────────────────────────────────────────────────────────────────────────
-       WASHI-和紙 (Paper Spectrum)
-       The warm, organic texture of handmade rice paper
-       ─────────────────────────────────────────────────────────────────────── */
-  --color-washi-50: oklch(0.99 0.005 90); /* Bright white */
-  --color-washi-100: oklch(0.97 0.008 85); /* Rice paper */
-  --color-washi-200: oklch(0.94 0.012 80); /* Aged paper */
-  --color-washi-300: oklch(0.9 0.015 75); /* Warm cream */
-  --color-washi-400: oklch(0.85 0.018 70); /* Tea-stained */
+     WASHI — 和紙 (Paper Spectrum)
+     The warm, organic texture of handmade rice paper
+     ───────────────────────────────────────────────────────────────────────── */
+  --color-washi-50:  oklch(0.99 0.005 90); /* Bright white              */
+  --color-washi-100: oklch(0.97 0.008 85); /* Rice paper                */
+  --color-washi-200: oklch(0.94 0.012 80); /* Aged paper                */
+  --color-washi-300: oklch(0.90 0.015 75); /* Warm cream                */
+  --color-washi-400: oklch(0.85 0.018 70); /* Tea-stained               */
 
   /* ─────────────────────────────────────────────────────────────────────────
-       SHUIRO-朱色 (Vermilion)
-       The sacred red of Torii gates and Hanko seals
-       ─────────────────────────────────────────────────────────────────────── */
-  --color-shu-500: oklch(0.55 0.22 25); /* Deep vermilion */
-  --color-shu-600: oklch(0.5 0.24 25); /* Shrine red */
-  --color-shu-700: oklch(0.45 0.22 25); /* Aged vermilion */
-
-  /* Extended accent-for rare highlights */
-  --color-kin: oklch(0.75 0.12 85); /* 金 Gold leaf */
-  --color-ai: oklch(0.35 0.12 250); /* 藍 Indigo */
+     SHUIRO — 朱色 (Vermilion)
+     The sacred red of Torii gates and Hanko seals
+     ───────────────────────────────────────────────────────────────────────── */
+  --color-shu-500: oklch(0.55 0.22 25); /* Deep vermilion              */
+  --color-shu-600: oklch(0.50 0.24 25); /* Shrine red — primary accent */
+  --color-shu-700: oklch(0.45 0.22 25); /* Aged vermilion              */
 
   /* ─────────────────────────────────────────────────────────────────────────
-       SEMANTIC MAPPING
-       ─────────────────────────────────────────────────────────────────────── */
-  --color-bg-primary: var(--color-washi-100);
+     EXTENDED ACCENTS — used sparingly for schedule type coding
+     ───────────────────────────────────────────────────────────────────────── */
+  --color-kin: oklch(0.75 0.12 85);  /* 金 Gold leaf — meet & greets  */
+  --color-ai:  oklch(0.35 0.12 250); /* 藍 Indigo    — DJ sets        */
+
+  /* ─────────────────────────────────────────────────────────────────────────
+     SEMANTIC TOKENS
+     ───────────────────────────────────────────────────────────────────────── */
+  --color-bg-primary:   var(--color-washi-100);
   --color-bg-secondary: var(--color-washi-200);
-  --color-bg-inverse: var(--color-sumi-950);
+  --color-bg-inverse:   var(--color-sumi-950);
 
-  --color-text-primary: var(--color-sumi-950);
+  --color-text-primary:   var(--color-sumi-950);
   --color-text-secondary: var(--color-sumi-600);
-  --color-text-muted: var(--color-sumi-400);
-  --color-text-inverse: var(--color-washi-100);
+  --color-text-muted:     var(--color-sumi-400);
+  --color-text-inverse:   var(--color-washi-100);
 
-  --color-accent: var(--color-shu-600);
+  --color-accent:       var(--color-shu-600);
   --color-accent-hover: var(--color-shu-500);
-  --color-border: var(--color-sumi-950);
+  --color-border:       var(--color-sumi-950);
   --color-border-subtle: var(--color-sumi-300);
 
   /* ─────────────────────────────────────────────────────────────────────────
-       EASING SYSTEM-Sharp, Decisive Motion
-       和の動き — No bounce, no playfulness. Precise like Ikebana.
-       ─────────────────────────────────────────────────────────────────────── */
+     EASING — Sharp, Decisive Motion
+     和の動き — No bounce. Precise like Ikebana.
+     ───────────────────────────────────────────────────────────────────────── */
+  --ease-expo-out:  cubic-bezier(0.19, 1, 0.22, 1); /* Primary — sharp decel  */
+  --ease-quint-out: cubic-bezier(0.23, 1, 0.32, 1); /* Slightly softer        */
+  --ease-circ-out:  cubic-bezier(0, 0.55, 0.45, 1); /* Mechanical, precise    */
+  --ease-sharp:     cubic-bezier(0.77, 0, 0.175, 1); /* Symmetrical reveals   */
 
-  /* Expo Out-Sharp deceleration (primary) */
-  --ease-expo-out: cubic-bezier(0.19, 1, 0.22, 1);
-
-  /* Quint Out-Slightly softer */
-  --ease-quint-out: cubic-bezier(0.23, 1, 0.32, 1);
-
-  /* Circ Out-Mechanical, precise */
-  --ease-circ-out: cubic-bezier(0, 0.55, 0.45, 1);
-
-  /* Sharp In-Out-For reveals */
-  --ease-sharp: cubic-bezier(0.77, 0, 0.175, 1);
-
-  /* Timing-Deliberate, unhurried */
   --duration-instant: 150ms;
-  --duration-fast: 300ms;
-  --duration-normal: 500ms;
-  --duration-slow: 800ms;
+  --duration-fast:    300ms;
+  --duration-normal:  500ms;
+  --duration-slow:    800ms;
   --duration-reveal: 1200ms;
 
   /* ─────────────────────────────────────────────────────────────────────────
-       SPACING-Ma (間) Negative Space System
-       Japanese design emphasizes emptiness as much as content
-       ─────────────────────────────────────────────────────────────────────── */
-  --space-1: 0.25rem; /* 4px */
-  --space-2: 0.5rem; /* 8px */
-  --space-3: 0.75rem; /* 12px */
-  --space-4: 1rem; /* 16px */
-  --space-6: 1.5rem; /* 24px */
-  --space-8: 2rem; /* 32px */
-  --space-12: 3rem; /* 48px */
-  --space-16: 4rem; /* 64px */
-  --space-24: 6rem; /* 96px */
-  --space-32: 8rem; /* 128px */
-  --space-48: 12rem; /* 192px */
-  --space-64: 16rem; /* 256px */
-
-  /* ─────────────────────────────────────────────────────────────────────────
-       BORDERS-Sharp, Architectural
-       No rounded corners. Clean cuts like paper edges.
-       ─────────────────────────────────────────────────────────────────────── */
-  --radius-none: 0;
-  --radius-sm: 2px; /* Only for subtle softening */
-
-  --border-thin: 1px;
-  --border-medium: 2px;
-  --border-thick: 4px;
-  --border-heavy: 8px;
-
-  /* ─────────────────────────────────────────────────────────────────────────
-       Z-INDEX HIERARCHY
-       ─────────────────────────────────────────────────────────────────────── */
-  --z-base: 0;
-  --z-raised: 10;
+     Z-INDEX HIERARCHY
+     ───────────────────────────────────────────────────────────────────────── */
+  --z-base:    0;
+  --z-raised:  10;
   --z-overlay: 100;
-  --z-modal: 200;
-  --z-max: 9999;
+  --z-modal:   200;
+  --z-max:     9999;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   BASE LAYER-Document Foundation
+   BASE LAYER
    ═══════════════════════════════════════════════════════════════════════════ */
 @layer base {
   *,
@@ -132,38 +108,35 @@
   }
 
   html {
+    /* scroll-behavior: auto intentionally — Lenis handles smooth scrolling.
+       The html element must NOT have scroll-smooth / scroll-behavior: smooth
+       or it fights Lenis and causes double-smoothing artifacts.            */
     scroll-behavior: auto;
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
     text-rendering: geometricPrecision;
   }
 
-  /* Add inside @layer base, within the body styles */
-
   body {
-  @apply font-sans antialiased;
-  background-color: var(--color-washi-100);
-  color: var(--color-sumi-950);
+    @apply font-sans antialiased;
+    background-color: var(--color-washi-100);
+    color: var(--color-sumi-950);
+    /* Fix: removed duplicate grain background-image from here.
+       StaticGrain component in layout.tsx already handles the grain overlay
+       at z-9990. Having both stacked doubled the opacity.               */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.15' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='0.04'/%3E%3C/svg%3E");
-
-  background-size: 300px 300px;
-  background-repeat: repeat;
-
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-
-  /* Selection-Vermilion highlight */
+  /* Vermilion text selection */
   ::selection {
     background-color: var(--color-shu-600);
     color: var(--color-washi-50);
   }
 
-  /* Focus states-Architectural precision */
+  /* Architectural focus ring */
   :focus-visible {
-    outline: var(--border-medium) solid var(--color-sumi-950);
+    outline: 2px solid var(--color-sumi-950);
     outline-offset: 2px;
   }
 
@@ -171,319 +144,67 @@
     outline: none;
   }
 
-  /* Scrollbar-Minimal, ink-like */
-  ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: var(--color-washi-200);
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: var(--color-sumi-400);
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-sumi-950);
-  }
+  /* Minimal ink-like scrollbar */
+  ::-webkit-scrollbar       { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--color-washi-200); }
+  ::-webkit-scrollbar-thumb { background: var(--color-sumi-400); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--color-sumi-950); }
 
   * {
     scrollbar-width: thin;
     scrollbar-color: var(--color-sumi-400) var(--color-washi-200);
   }
 
-  /* Typography hierarchy */
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-display;
-    font-weight: 700;
-    letter-spacing: -0.03em;
-    line-height: 1.1;
-    text-wrap: balance;
-  }
+  /* Fix: removed global h1–h6 font-size clamp and letter-spacing.
+     Those rules were immediately overridden by every component's own
+     Tailwind classes, making them redundant. Any heading that didn't
+     explicitly override got unexpected clamp() sizes.
+     Components own their heading sizes.                                  */
 
-  h1 {
-    font-size: clamp(2.5rem, 8vw, 6rem);
-  }
+  /* Fix: removed global p { max-width: 65ch }.
+     This broke every layout component — flex/grid cells, card excerpts,
+     stat labels, nav subtitles — all capped at 65ch unless overridden
+     with max-w-none. Apply reading-width constraints in context instead. */
 
-  h2 {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-  }
-
-  h3 {
-    font-size: clamp(1.5rem, 3vw, 2rem);
-  }
-
-  p {
-    text-wrap: pretty;
-    max-width: 65ch;
-  }
-
-  /* Links-Sharp underline treatment */
   a {
     color: inherit;
     text-decoration: none;
     transition: color var(--duration-fast) var(--ease-expo-out);
   }
 
-  /* Strong emphasis */
-  strong,
-  b {
-    font-weight: 700;
-  }
+  strong, b { font-weight: 700; }
 
-  /* Images-No border radius anywhere */
-  img,
-  video {
+  img, video {
     max-width: 100%;
     height: auto;
     display: block;
     border-radius: 0;
   }
 
-  /* Horizontal rules-Ink line */
   hr {
     border: none;
-    border-top: var(--border-thin) solid var(--color-sumi-950);
-    margin: var(--space-12) 0;
+    border-top: 1px solid var(--color-sumi-950);
+    margin: 3rem 0;
   }
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   COMPONENT LAYER-Wa-Modern Patterns
-   ═══════════════════════════════════════════════════════════════════════════ */
-@layer components {
-  /* ─────────────────────────────────────────────────────────────────────────
-     INK OVERLAY-Sumi wash effect
-     ─────────────────────────────────────────────────────────────────────── */
-  .ink-overlay {
-    position: relative;
-  }
-
-  .ink-overlay::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: var(--color-sumi-950);
-    opacity: 0;
-    transition: opacity var(--duration-normal) var(--ease-expo-out);
-    pointer-events: none;
-  }
-
-  .ink-overlay:hover::after {
-    opacity: 0.85;
-  }
-
-  /* ─────────────────────────────────────────────────────────────────────────
-     RED SUN OVERLAY-日の丸 Effect
-     ─────────────────────────────────────────────────────────────────────── */
-  .red-sun-overlay {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .red-sun-overlay::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    background: radial-gradient(
-      circle,
-      var(--color-shu-600) 0%,
-      var(--color-shu-600) 50%,
-      transparent 70%
-    );
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: width var(--duration-slow) var(--ease-expo-out),
-      height var(--duration-slow) var(--ease-expo-out);
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  .red-sun-overlay:hover::before {
-    width: 200%;
-    height: 200%;
-  }
-
-  /* ─────────────────────────────────────────────────────────────────────────
-     SHOJI GRID-Traditional Screen Layout
-     ─────────────────────────────────────────────────────────────────────── */
-  .shoji-grid {
-    display: grid;
-    border: var(--border-medium) solid var(--color-sumi-950);
-    background: linear-gradient(
-        to right,
-        var(--color-sumi-950) var(--border-thin),
-        transparent var(--border-thin)
-      ),
-      linear-gradient(
-        to bottom,
-        var(--color-sumi-950) var(--border-thin),
-        transparent var(--border-thin)
-      );
-    background-size: 25% 25%;
-  }
-
-  .shoji-cell {
-    border: var(--border-thin) solid var(--color-sumi-950);
-    background: var(--color-washi-100);
-    padding: var(--space-6);
-  }
-
-  /* ─────────────────────────────────────────────────────────────────────────
-     VERTICAL TEXT-Tategaki (縦書き)
-     ─────────────────────────────────────────────────────────────────────── */
-  .tategaki {
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-  }
-
-  .tategaki-upright {
-    writing-mode: vertical-rl;
-    text-orientation: upright;
-  }
-
-  /* ─────────────────────────────────────────────────────────────────────────
-     HANKO STAMP-Seal Effect
-     ─────────────────────────────────────────────────────────────────────── */
-  .hanko {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 3rem;
-    height: 3rem;
-    border: var(--border-medium) solid var(--color-shu-600);
-    color: var(--color-shu-600);
-    font-size: 0.875rem;
-    font-weight: 700;
-    transform: rotate(-5deg);
-    position: relative;
-  }
-
-  .hanko::before {
-    content: "";
-    position: absolute;
-    inset: 2px;
-    border: var(--border-thin) solid var(--color-shu-600);
-  }
-
-  /* ─────────────────────────────────────────────────────────────────────────
-     MINIMAL BUTTON-Swiss Precision
-     ─────────────────────────────────────────────────────────────────────── */
-  .btn-minimal {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--space-3) var(--space-6);
-    background: transparent;
-    color: var(--color-text-primary);
-    border: var(--border-medium) solid var(--color-sumi-950);
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background var(--duration-fast) var(--ease-expo-out),
-      color var(--duration-fast) var(--ease-expo-out);
-  }
-
-  .btn-minimal:hover {
-    background: var(--color-sumi-950);
-    color: var(--color-washi-50);
-  }
-
-  .btn-vermilion {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--space-3) var(--space-6);
-    background: var(--color-shu-600);
-    color: var(--color-washi-50);
-    border: none;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background var(--duration-fast) var(--ease-expo-out);
-  }
-
-  .btn-vermilion:hover {
-    background: var(--color-shu-500);
-  }
-
-  /* ─────────────────────────────────────────────────────────────────────────
-     WASHI TEXTURE-Paper Overlay
-     ─────────────────────────────────────────────────────────────────────── */
-  .washi-texture {
-    position: relative;
-  }
-
-  .washi-texture::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='washi'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23washi)' opacity='0.06'/%3E%3C/svg%3E");
-    pointer-events: none;
-    mix-blend-mode: multiply;
-  }
-
-  /* ─────────────────────────────────────────────────────────────────────────
-     EDITORIAL LABEL-Magazine Style
-     ─────────────────────────────────────────────────────────────────────── */
-  .editorial-label {
-    display: inline-block;
-    padding: var(--space-1) var(--space-2);
-    background: var(--color-sumi-950);
-    color: var(--color-washi-50);
-    font-size: 0.625rem;
-    font-weight: 600;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-  }
-
-  .editorial-label--vermilion {
-    background: var(--color-shu-600);
-  }
-
-  /* ─────────────────────────────────────────────────────────────────────────
-     DIVIDER LINES-Precise Rules
-     ─────────────────────────────────────────────────────────────────────── */
-  .rule {
-    width: 100%;
-    height: var(--border-thin);
-    background: var(--color-sumi-950);
-    border: none;
-  }
-
-  .rule--thick {
-    height: var(--border-thick);
-  }
-
-  .rule--vermilion {
-    background: var(--color-shu-600);
-  }
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   UTILITY LAYER-Atomic Helpers
+   UTILITIES
    ═══════════════════════════════════════════════════════════════════════════ */
 @layer utilities {
-  /* Vertical writing utilities */
+  /* Vertical writing — used throughout for Japanese kanji labels */
   .writing-vertical {
     writing-mode: vertical-rl;
-    /* Forces characters to stand upright instead of rotating 90deg */
-    text-orientation: upright; 
-    /* Ensures no accidental italics */
+    text-orientation: upright;
+    font-style: normal;
+    letter-spacing: 0.1em;
+  }
+
+  /* Fix: writing-vertical-lr was used in marketing page but not defined.
+     Same as writing-vertical but text flows left-to-right (standard tategaki). */
+  .writing-vertical-lr {
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
     font-style: normal;
     letter-spacing: 0.1em;
   }
@@ -492,108 +213,22 @@
     writing-mode: horizontal-tb;
   }
 
-  .text-upright {
-    text-orientation: upright;
-  }
+  /* Aspect ratios for poster/editorial formats */
+  .aspect-poster  { aspect-ratio: 2 / 3; }
+  .aspect-shoji   { aspect-ratio: 3 / 4; }
+  .aspect-golden  { aspect-ratio: 1.618 / 1; }
 
-  .text-mixed {
-    text-orientation: mixed;
-  }
-
-  /* Sharp box-No radius override */
-  .sharp {
-    border-radius: 0 !important;
-  }
-
-  /* Aspect ratios for poster formats */
-  .aspect-poster {
-    aspect-ratio: 2 / 3;
-  }
-
-  .aspect-shoji {
-    aspect-ratio: 3 / 4;
-  }
-
-  .aspect-golden {
-    aspect-ratio: 1.618 / 1;
-  }
-
-  /* Grid track utilities for Shoji layouts */
-  .grid-shoji-4 {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0;
-  }
-
-  .grid-shoji-6 {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 0;
-  }
-
-  /* Ink text color */
-  .text-ink {
-    color: var(--color-sumi-950);
-  }
-
-  .text-paper {
-    color: var(--color-washi-100);
-  }
-
-  .text-vermilion {
-    color: var(--color-shu-600);
-  }
-
-  /* Background utilities */
-  .bg-ink {
-    background-color: var(--color-sumi-950);
-  }
-
-  .bg-paper {
-    background-color: var(--color-washi-100);
-  }
-
-  .bg-vermilion {
-    background-color: var(--color-shu-600);
-  }
-
-  /* Border utilities */
-  .border-ink {
-    border-color: var(--color-sumi-950);
-  }
-
-  .border-vermilion {
-    border-color: var(--color-shu-600);
-  }
-
-  /* Hide scrollbar */
+  /* Hide scrollbar while keeping scroll functionality */
   .scrollbar-none {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+  .scrollbar-none::-webkit-scrollbar { display: none; }
 
-  .scrollbar-none::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* GPU acceleration */
+  /* GPU acceleration hint for animated elements */
   .gpu {
     transform: translateZ(0);
     will-change: transform;
-  }
-
-  /* Grain overlay for any element */
-  .grain {
-    position: relative;
-  }
-
-  .grain::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.05'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 1;
   }
 
   /* Reduced motion */
@@ -606,80 +241,38 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   ANIMATIONS-Precise, Non-Bouncy
+   ANIMATIONS
    ═══════════════════════════════════════════════════════════════════════════ */
 @keyframes fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes slide-in-right {
-  from {
-    opacity: 0;
-    transform: translateX(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes reveal-vertical {
-  from {
-    clip-path: inset(0 0 100% 0);
-  }
-  to {
-    clip-path: inset(0 0 0 0);
-  }
+  from { clip-path: inset(0 0 100% 0); }
+  to   { clip-path: inset(0 0 0% 0); }
 }
 
 @keyframes reveal-horizontal {
-  from {
-    clip-path: inset(0 100% 0 0);
-  }
-  to {
-    clip-path: inset(0 0 0 0);
-  }
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0% 0 0); }
 }
 
 @keyframes ink-brush {
-  from {
-    transform: scaleX(0);
-    transform-origin: left;
-  }
-  to {
-    transform: scaleX(1);
-    transform-origin: left;
-  }
+  from { transform: scaleX(0); transform-origin: left; }
+  to   { transform: scaleX(1); transform-origin: left; }
 }
 
 @layer utilities {
-  .animate-fade-up {
-    animation: fade-up var(--duration-normal) var(--ease-expo-out) forwards;
-  }
-
-  .animate-slide-right {
-    animation: slide -in -right var(--duration-normal) var(--ease-expo-out)
-      forwards;
-  }
-
-  .animate-reveal-v {
-    animation: reveal-vertical var(--duration-slow) var(--ease-expo-out)
-      forwards;
-  }
-
-  .animate-reveal-h {
-    animation: reveal-horizontal var(--duration-slow) var(--ease-expo-out)
-      forwards;
-  }
-
-  .animate-ink-brush {
-    animation: ink-brush var(--duration-slow) var(--ease-expo-out) forwards;
-  }
+  .animate-fade-up     { animation: fade-up var(--duration-normal) var(--ease-expo-out) forwards; }
+  /* Fix: was "slide -in -right" (with spaces) — invalid CSS, animation never fired */
+  .animate-slide-right { animation: slide-in-right var(--duration-normal) var(--ease-expo-out) forwards; }
+  .animate-reveal-v    { animation: reveal-vertical var(--duration-slow) var(--ease-expo-out) forwards; }
+  .animate-reveal-h    { animation: reveal-horizontal var(--duration-slow) var(--ease-expo-out) forwards; }
+  .animate-ink-brush   { animation: ink-brush var(--duration-slow) var(--ease-expo-out) forwards; }
 }

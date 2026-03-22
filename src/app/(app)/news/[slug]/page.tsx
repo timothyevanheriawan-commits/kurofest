@@ -2,13 +2,16 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { getNewsItem, MOCK_NEWS, CATEGORY_LABELS } from "@/lib/mock-news";
+import { getNewsBySlug, getNews } from "@/lib/data";
+import { CATEGORY_LABELS } from "@/lib/mock-news";
 import { ArrowLeft } from "lucide-react";
 import { Footer } from "@/components/features/layout/footer";
 import { cn } from "@/lib/utils";
 
-export function generateStaticParams() {
-    return MOCK_NEWS.map((item) => ({ slug: item.slug }));
+// Generate static paths isn't strictly necessary with SSR but good for performance if cached
+export async function generateStaticParams() {
+    const news = await getNews();
+    return news.map((item) => ({ slug: item.slug }));
 }
 
 export async function generateMetadata({
@@ -17,7 +20,7 @@ export async function generateMetadata({
     params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
     const { slug } = await params;
-    const item = getNewsItem(slug);
+    const item = await getNewsBySlug(slug);
 
     if (!item) return { title: "News Not Found" };
 
@@ -33,14 +36,14 @@ export default async function NewsDetailPage({
     params: Promise<{ slug: string }>;
 }) {
     const { slug } = await params;
-    const item = getNewsItem(slug);
+    const item = await getNewsBySlug(slug);
 
     if (!item) return notFound();
 
-    const categoryLabel = CATEGORY_LABELS[item.category];
+    const categoryLabel = CATEGORY_LABELS[item.category as keyof typeof CATEGORY_LABELS];
 
     // Format date
-    const formattedDate = new Date(item.date).toLocaleDateString("en-US", {
+    const formattedDate = new Date(item.published_at).toLocaleDateString("en-US", {
         weekday: "long",
         month: "long",
         day: "numeric",
@@ -49,6 +52,8 @@ export default async function NewsDetailPage({
 
     // Parse content into paragraphs
     const paragraphs = item.content.split("\n\n");
+
+    const newsList = await getNews();
 
     return (
         <>
@@ -89,13 +94,15 @@ export default async function NewsDetailPage({
                         </h1>
 
                         {/* Japanese Title */}
-                        <p className="mt-3 font-serif text-xl text-sumi-400">
-                            {item.title_ja}
-                        </p>
+                        {item.title_ja && (
+                            <p className="mt-3 font-serif text-xl text-sumi-400">
+                                {item.title_ja}
+                            </p>
+                        )}
 
                         {/* Date - Below title, subtle */}
                         <time
-                            dateTime={item.date}
+                            dateTime={item.published_at}
                             className="block mt-6 text-sm font-mono text-sumi-500"
                         >
                             {formattedDate}
@@ -106,10 +113,10 @@ export default async function NewsDetailPage({
                     </header>
 
                     {/* Featured Image */}
-                    {item.image && (
+                    {item.image_url && (
                         <div className="relative w-full aspect-video mb-12 border-2 border-sumi-950 overflow-hidden shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
                             <Image
-                                src={item.image}
+                                src={item.image_url}
                                 alt={item.title}
                                 fill
                                 className="object-cover"
@@ -120,7 +127,7 @@ export default async function NewsDetailPage({
 
                     {/* Content - Editorial Typography */}
                     <div className="prose-custom">
-                        {paragraphs.map((paragraph, idx) => {
+                        {paragraphs.map((paragraph: string, idx: number) => {
                             // Check for bold headers (markdown style)
                             if (paragraph.startsWith("**") && paragraph.endsWith("**")) {
                                 return (
@@ -137,7 +144,7 @@ export default async function NewsDetailPage({
                             if (paragraph.includes("\n- ")) {
                                 const lines = paragraph.split("\n");
                                 const title = lines[0].replace(/\*\*/g, "");
-                                const items = lines.slice(1).filter((line) => line.startsWith("- "));
+                                const listItems = lines.slice(1).filter((line: string) => line.startsWith("- "));
 
                                 return (
                                     <div key={idx} className="mt-8 mb-6">
@@ -147,7 +154,7 @@ export default async function NewsDetailPage({
                                             </h3>
                                         )}
                                         <ul className="space-y-2 pl-0">
-                                            {items.map((line, i) => (
+                                            {listItems.map((line: string, i: number) => (
                                                 <li
                                                     key={i}
                                                     className="flex items-start gap-3 text-sumi-700 leading-relaxed"
@@ -225,7 +232,7 @@ export default async function NewsDetailPage({
                             More News
                         </h2>
                         <div className="flex gap-4">
-                            {MOCK_NEWS.filter((n) => n.slug !== slug)
+                            {newsList.filter((n) => n.slug !== slug)
                                 .slice(0, 2)
                                 .map((related) => (
                                     <Link
@@ -234,7 +241,7 @@ export default async function NewsDetailPage({
                                         className="flex-1 p-4 border border-sumi-200 hover:border-sumi-950 transition-colors"
                                     >
                                         <span className="text-[10px] font-semibold tracking-[0.1em] uppercase text-shu-600">
-                                            {CATEGORY_LABELS[related.category].en}
+                                            {CATEGORY_LABELS[related.category as keyof typeof CATEGORY_LABELS].en}
                                         </span>
                                         <h3 className="mt-2 font-display font-bold text-sumi-950 line-clamp-2">
                                             {related.title}
