@@ -100,7 +100,7 @@ export function HeroSection() {
                     y: prefersReducedMotion ? 0 : yContent,
                     opacity: prefersReducedMotion ? 1 : opacityContent,
                 }}
-                className="relative z-20 flex flex-col h-full px-6"
+                className="relative z-20 flex flex-col h-full px-4 sm:px-6"
             >
                 {/* Top section: kanji + title + date — pushed down from top on mobile */}
                 <div className="flex flex-col items-center justify-center flex-1 pt-24 md:pt-0">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus, X, RotateCcw } from "lucide-react";
 import { VenueSVG } from "./venue-svg";
@@ -14,6 +14,13 @@ export function MapViewer() {
     const viewportRef = useRef<HTMLDivElement>(null);
     const [scale, setScale] = useState(1);
     const [activeNode, setActiveNode] = useState<MapNode | null>(null);
+
+    // Set initial scale on mount for mobile
+    useEffect(() => {
+        if (typeof window !== "undefined" && window.innerWidth < 768) {
+            requestAnimationFrame(() => setScale(0.8));
+        }
+    }, []);
 
     const handleZoom = (dir: "in" | "out") =>
         setScale((prev) => Math.min(Math.max(prev + (dir === "in" ? 0.25 : -0.25), 0.5), 3));
@@ -109,7 +116,7 @@ export function MapViewer() {
                                 onClick={() => setActiveNode(isActive ? null : node)}
                                 aria-label={node.label}
                                 className={cn(
-                                    "absolute w-8 h-8 -ml-4 -mt-4",
+                                    "absolute w-10 h-10 -ml-5 -mt-5 md:w-8 md:h-8 md:-ml-4 md:-mt-4",
                                     "flex items-center justify-center",
                                     "border-2 border-washi-100",
                                     "shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)]",

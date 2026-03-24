@@ -44,7 +44,7 @@ export default function GuestsTable({
     return (
         <>
             {/* Search toolbar */}
-            <div className="flex bg-white border-2 border-sumi-950 p-4">
+            <div className="flex flex-col sm:flex-row bg-white border-2 border-sumi-950 p-4 gap-4">
                 <div className="relative flex-1">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-sumi-300" size={16} />
                     <input
@@ -55,14 +55,15 @@ export default function GuestsTable({
                         className="w-full pl-10 pr-4 py-2 bg-transparent text-sm focus:outline-none"
                     />
                 </div>
-                <span className="flex items-center px-4 font-mono text-xs text-sumi-400">
+                <span className="flex items-center sm:px-4 font-mono text-xs text-sumi-400">
                     {filtered.length} / {guests.length}
                 </span>
             </div>
 
             {/* Table */}
-            <div className="bg-white border-2 border-sumi-950 overflow-hidden">
-                <table className="w-full text-left border-collapse">
+            <div className="bg-white border-2 border-sumi-950">
+                <div className="overflow-x-auto">
+                    <table className="w-full text-left border-collapse min-w-[600px]">
                     <thead>
                         <tr className="bg-sumi-50 border-b-2 border-sumi-950">
                             {["Guest", "Role", "Status", "Actions"].map((h, i) => (
@@ -144,7 +145,8 @@ export default function GuestsTable({
                             </tr>
                         )}
                     </tbody>
-                </table>
+                    </table>
+                </div>
             </div>
         </>
     );

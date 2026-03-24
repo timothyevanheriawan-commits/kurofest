@@ -181,7 +181,7 @@ export default async function NewsDetailPage({
                                         <span
                                             className={cn(
                                                 "float-left mr-3 mt-1",
-                                                "font-serif text-5xl font-bold text-sumi-950",
+                                                "font-serif text-4xl sm:text-5xl font-bold text-sumi-950",
                                                 "leading-none"
                                             )}
                                         >
@@ -231,7 +231,7 @@ export default async function NewsDetailPage({
                         <h2 className="text-[10px] font-semibold tracking-[0.2em] text-sumi-400 uppercase mb-6">
                             More News
                         </h2>
-                        <div className="flex gap-4">
+                        <div className="flex flex-col sm:flex-row gap-4">
                             {newsList.filter((n) => n.slug !== slug)
                                 .slice(0, 2)
                                 .map((related) => (

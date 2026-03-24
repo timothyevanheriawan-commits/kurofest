@@ -27,7 +27,7 @@ export default function MarketingPage() {
 
             {/* ── 2. Countdown — flows directly from hero (same bg) ─────── */}
             <section className="bg-sumi-950 border-t border-washi-100/10">
-                <div className="mx-auto max-w-7xl px-6 md:px-12">
+                <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-12">
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8 py-12 md:py-16">
                         <div>
                             <span className="text-[10px] font-semibold tracking-[0.4em] text-washi-100/30 uppercase">
@@ -52,7 +52,7 @@ export default function MarketingPage() {
 
             {/* ── 3. Guest showcase ───────────────────────────────────────── */}
             <section className="bg-washi-100 py-24 md:py-32">
-                <div className="mx-auto max-w-7xl px-6 md:px-12">
+                <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-12">
                     <header className="mb-12 md:mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
                         <div>
                             <SlideReveal>
@@ -99,7 +99,7 @@ export default function MarketingPage() {
 
             {/* ── 5. Stats — inline row, numbers natural size ─────────────── */}
             <section className="bg-sumi-950 text-washi-100 overflow-hidden">
-                <div className="mx-auto max-w-7xl px-6 md:px-12 pt-20 md:pt-28">
+                <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-12 pt-20 md:pt-28">
                     <SlideReveal>
                         <span className="text-[10px] font-semibold tracking-[0.4em] text-washi-100/30 uppercase">
                             About the Event
@@ -108,15 +108,15 @@ export default function MarketingPage() {
                     <TextReveal
                         as="p"
                         delay={0.1}
-                        className="mt-6 font-serif text-2xl md:text-3xl lg:text-4xl leading-relaxed text-washi-100/80 max-w-3xl"
+                        className="mt-6 font-serif text-xl sm:text-2xl md:text-3xl lg:text-4xl leading-relaxed text-washi-100/80 max-w-3xl"
                     >
                         {"Japan's premier celebration of anime, manga, and pop culture."}
                     </TextReveal>
                 </div>
 
                 <div className="mt-12 md:mt-16 border-t border-washi-100/10">
-                    <div className="mx-auto max-w-7xl px-6 md:px-12 py-10 md:py-14">
-                        <div className="flex flex-wrap gap-x-14 md:gap-x-20 gap-y-8">
+                    <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-12 py-10 md:py-14">
+                        <div className="grid grid-cols-2 md:flex md:flex-wrap gap-x-8 sm:gap-x-14 md:gap-x-20 gap-y-8">
                             {[
                                 { value: "50+", label: "Guests", labelJa: "ゲスト" },
                                 { value: "100+", label: "Events", labelJa: "イベント" },
@@ -124,11 +124,11 @@ export default function MarketingPage() {
                                 { value: "30K+", label: "Attendees", labelJa: "来場者" },
                             ].map((stat, i) => (
                                 <SlideReveal key={stat.label} delay={i * 0.08}>
-                                    <div className="flex items-baseline gap-3">
-                                        <span className="font-display text-6xl md:text-7xl lg:text-8xl font-black text-shu-500 leading-none tabular-nums">
+                                    <div className="flex flex-col">
+                                        <span className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-shu-500 leading-none tabular-nums">
                                             {stat.value}
                                         </span>
-                                        <div>
+                                        <div className="mt-2">
                                             <span className="block text-[11px] tracking-[0.2em] uppercase text-washi-100/50 leading-tight">
                                                 {stat.label}
                                             </span>
@@ -143,7 +143,7 @@ export default function MarketingPage() {
                     </div>
                 </div>
 
-                <div className="mx-auto max-w-7xl px-6 md:px-12 py-14 md:py-20 flex flex-col md:flex-row items-start md:items-center justify-between gap-8 border-t border-washi-100/10">
+                <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-12 py-14 md:py-20 flex flex-col md:flex-row items-start md:items-center justify-between gap-8 border-t border-washi-100/10">
                     <SlideReveal>
                         <p className="font-serif text-lg text-washi-100/40">
                             日本最大のアニメ・漫画・ポップカルチャーの祭典
@@ -160,8 +160,8 @@ export default function MarketingPage() {
 
             {/* ── 6. Featured events — visible cards on dark bg ───────────── */}
             <section className="bg-sumi-900 border-t border-sumi-800">
-                <div className="mx-auto max-w-7xl px-6 md:px-12 py-16 md:py-20">
-                    <div className="flex items-end justify-between mb-10">
+                <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-12 py-16 md:py-20">
+                    <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 gap-4">
                         <div>
                             <span className="text-[10px] font-semibold tracking-[0.4em] text-washi-100/30 uppercase">
                                 Programme
@@ -250,7 +250,7 @@ export default function MarketingPage() {
 
             {/* ── 7. News — editorial layout ──────────────────────────────── */}
             <section className="bg-washi-100 py-24 md:py-32">
-                <div className="mx-auto max-w-7xl px-6 md:px-12">
+                <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-12">
                     <header className="mb-12 md:mb-16 flex gap-6 items-start">
                         <div className="hidden md:block w-px self-stretch bg-sumi-200 shrink-0" />
                         <div className="flex-1">
@@ -379,13 +379,13 @@ export default function MarketingPage() {
             </section>
 
             {/* ── 8. Ticket CTA ───────────────────────────────────────────── */}
-            <section className="bg-sumi-950 border-t-2 border-shu-600">
-                <div className="mx-auto max-w-7xl px-6 md:px-12 py-20 md:py-28">
+            <section className="bg-sumi-950 border-t-2 border-shu-600 overflow-hidden">
+                <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-12 py-20 md:py-28">
                     <div className="grid md:grid-cols-3 gap-8 md:gap-0 items-start">
                         <div className="md:col-span-1 md:border-r border-washi-100/10 md:pr-12">
                             <TextReveal
                                 as="h2"
-                                className="font-display text-5xl md:text-6xl font-black tracking-tight text-washi-100 leading-none"
+                                className="font-display text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-washi-100 leading-none"
                             >
                                 {"Secure\nYour Pass"}
                             </TextReveal>
@@ -408,13 +408,13 @@ export default function MarketingPage() {
                                         <Link
                                             href="/tickets"
                                             className={cn(
-                                                "group flex items-center justify-between p-5 border-2 transition-all duration-300",
+                                                "group flex flex-col sm:flex-row sm:items-center sm:justify-between p-5 border-2 transition-all duration-300",
                                                 tier.highlight
                                                     ? "border-shu-600 bg-shu-600/10 hover:bg-shu-600/20"
                                                     : "border-washi-100/10 hover:border-washi-100/30"
                                             )}
                                         >
-                                            <div className="flex items-center gap-4 min-w-0">
+                                            <div className="flex items-center gap-3 min-w-0">
                                                 {tier.highlight && (
                                                     <span className="shrink-0 text-[9px] font-bold tracking-[0.1em] uppercase bg-shu-600 text-washi-100 px-2 py-1">
                                                         Popular
@@ -424,12 +424,12 @@ export default function MarketingPage() {
                                                     <span className="block font-display font-black text-washi-100 text-lg leading-none">
                                                         {tier.name}
                                                     </span>
-                                                    <span className="block font-serif text-xs text-washi-100/40 mt-0.5 truncate">
+                                                    <span className="block font-serif text-xs text-washi-100/40 mt-0.5 leading-relaxed">
                                                         {tier.features}
                                                     </span>
                                                 </div>
                                             </div>
-                                            <div className="flex items-center gap-4 shrink-0 ml-4">
+                                            <div className="flex items-center justify-between sm:justify-end gap-4 shrink-0 mt-4 sm:mt-0 border-t sm:border-t-0 border-washi-100/5 pt-4 sm:pt-0">
                                                 <span className="font-mono text-xl font-bold text-washi-100">
                                                     {tier.price}
                                                 </span>
@@ -444,11 +444,11 @@ export default function MarketingPage() {
                             </div>
 
                             <SlideReveal delay={0.3}>
-                                <div className="mt-6 flex items-center justify-between">
-                                    <p className="text-xs text-washi-100/30 font-mono">
+                                <div className="mt-10 sm:mt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-6">
+                                    <p className="text-[10px] sm:text-xs text-washi-100/30 font-mono">
                                         Early Bird ends July 31 · All sales final
                                     </p>
-                                    <CTAButton href="/tickets" variant="primary" size="lg">
+                                    <CTAButton href="/tickets" variant="primary" size="lg" className="w-full sm:w-auto">
                                         Buy Tickets
                                         <ArrowRight size={14} className="ml-2" />
                                     </CTAButton>
