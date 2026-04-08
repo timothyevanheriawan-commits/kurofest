@@ -8,56 +8,20 @@ import { CommandPalette } from "@/components/ui/command-palette";
 import { cn } from "@/lib/utils";
 import "@/app/globals.css";
 
-/* ─── Metadata ──────────────────────────────────────────────────────────── */
-
 export const metadata: Metadata = {
   title: {
     default: "KuroFest 2026 | 黒祭",
     template: "%s | KuroFest 2026",
   },
-  description:
-    "Japan's premier anime and pop-culture convention. August 15–16, 2026 at Tokyo Big Sight.",
-  openGraph: {
-    type: "website",
-    locale: "ja_JP",
-    alternateLocale: "en_US",
-    siteName: "KuroFest 2026",
-    title: "KuroFest 2026 | 黒祭",
-    description:
-      "Japan's premier anime and pop-culture convention. August 15–16, 2026 at Tokyo Big Sight.",
-    images: [
-      {
-        url: "https://images.unsplash.com/photo-1722803921446-70be3842871e?q=80&w=1200",
-        width: 1200,
-        height: 630,
-        alt: "KuroFest 2026",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "KuroFest 2026 | 黒祭",
-    description:
-      "Japan's premier anime and pop-culture convention. August 15–16, 2026 at Tokyo Big Sight.",
-    images: [
-      "https://images.unsplash.com/photo-1722803921446-70be3842871e?q=80&w=1200",
-    ],
-  },
-  icons: {
-    icon: "/favicon.ico",
-  },
+  description: "Japan's premier anime and pop-culture convention. August 15–16, 2026 at Tokyo Big Sight.",
+  // ... other metadata
 };
-
-/* ─── Viewport (separate export required in Next.js 15) ─────────────────── */
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  // Matches sumi-950 — browser chrome blends into the dark hero on mobile
-  themeColor: "#0d0d11",
+  themeColor: "#0d0d11", // sumi-950
 };
-
-/* ─── Layout ────────────────────────────────────────────────────────────── */
 
 export default function RootLayout({
   children,
@@ -67,11 +31,7 @@ export default function RootLayout({
   modal: React.ReactNode;
 }) {
   return (
-    // lang="ja" — primary content language is Japanese
-    // Individual English sections don't need overrides since browsers handle
-    // mixed-script content correctly; the lang attr mainly affects glyph
-    // variant selection for CJK characters and screen-reader pronunciation.
-    <html lang="ja">
+    <html lang="ja" className="selection:bg-shu-600 selection:text-washi-50">
       <body
         className={cn(
           fontDisplay.variable,
@@ -80,17 +40,34 @@ export default function RootLayout({
           fontNotoSerifJP.variable,
           "font-sans antialiased",
           "bg-washi-100 text-sumi-950",
-          "overflow-x-hidden min-h-screen"
+          "min-h-screen flex flex-col"
         )}
       >
+        {/* Accessibility: Keyboard users skip nav */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-shu-600 focus:text-washi-100 font-mono text-xs"
+        >
+          Skip to content (Content へ移動)
+        </a>
+
         <CustomCursor />
-        <StaticGrain opacity={0.025} />
+
+        {/* Pointer-events-none ensures clicks go through the grain */}
+        <StaticGrain opacity={0.025} className="pointer-events-none" />
+
         <CommandPalette />
 
         <SmoothScroll>
           <Header />
-          {children}
+
+          <main id="main-content" className="flex-grow outline-none" tabIndex={-1}>
+            {children}
+          </main>
+
           {modal}
+
+          {/* Footer would go here */}
         </SmoothScroll>
       </body>
     </html>
